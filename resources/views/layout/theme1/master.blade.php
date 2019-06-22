@@ -48,7 +48,7 @@
         <div class="page-breadcrumb">
             <div class="row align-items-center">
                 <div class="col-12">
-                    <h4 class="page-title text-center">{{isset($title)?title:config('app.name')}}</h4>
+                    <h4 class="page-title text-center">{{ isset($title)?$title:config('app.name')}}</h4>
 
                 </div>
             </div>
