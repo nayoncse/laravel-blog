@@ -14,7 +14,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $data['title'] = 'category list';
+        $data['categories'] = Category::orderBy('id')->get();
+        $data['seriall'] =1;
+        return view('admin.category.index',$data);
     }
 
     /**
@@ -25,7 +28,7 @@ class CategoryController extends Controller
     public function create()
     {
         $data['title'] = 'Create new category';
-        return view('admin/category.create',$data);
+        return view('admin.category.create',$data);
     }
 
     /**
@@ -42,9 +45,9 @@ class CategoryController extends Controller
         $data['name'] = $request->name;
         $data['details'] = $request->details;
         Category::create($data);
-        return redirect()->route('category.index');
         session()->flash('message','Category creted sussesfully');
-        dd($request->all());
+        return redirect()->route('category.index');
+
     }
 
     /**
@@ -66,7 +69,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['title'] = 'Edit category';
+        $data['category'] =Category::findOrFail($id);
+        return view('admin.category.edit',$data);
     }
 
     /**
@@ -78,7 +83,16 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name'=>'required'
+        ]);
+
+        $data['name'] = $request->name;
+        $data['details'] = $request->details;
+
+        Category::findOrFail($id)->update($data);
+        session()->flash('message','Category updated successfully');
+        return redirect()->route('category.index');
     }
 
     /**

@@ -60,6 +60,7 @@
         <!-- Container fluid  -->
         <!-- ============================================================== -->
         <div class="container-fluid">
+            @include('layout.theme1._messages')
           @yield('content')
             <!-- ============================================================== -->
             <!-- Recent comment and chats -->
